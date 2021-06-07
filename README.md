@@ -93,6 +93,48 @@ docker run -d -p 13306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysq
 
 ***
 
+### 네트워크 종류
+
+- bridget
+  - 하나의 호스트 컴퓨터 내에서 여러 컨테이너들이 서로 소통할 수 있도록 함
+- host
+  - 호스트의 네트워크 환경을 그대로 사용함
+- none
+  - 네트워크를 사용하지 않음
+
+### 네트워크 조회
+
+``` bash
+docker network ls
+```
+
+### 네트워크 생성
+
+- --gateway <IP> : 동일 LAN에 존재하지 않는 다른 네트워크와 통신할 IP 설정
+- --subnet <IP> : 동일 LAN 네트워크 IP 범위 설정
+
+``` bash
+docker network create
+docker --gateway 172.18.0.1 --subnet 172.18.0.0/16 <네트워크명>
+```
+
+### 네트워크 상세 정보
+
+``` bash
+docker network inspect
+```
+
+### 컨테이너 네트워크 연결
+
+``` bash
+# 이미 생성된 컨테이너에 네트워크 연결
+docker network connect <네트워크명> <컨테이너명>
+# 컨테이너 생성과 동시에 네트워크 연결
+docker run --network <네트워크명>
+```
+
+***
+
 ### Dockerfile
 
 #### FROM
